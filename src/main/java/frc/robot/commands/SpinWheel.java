@@ -8,15 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.Spinner;
 
 public class SpinWheel extends CommandBase {
-  Spinner spinner;
   boolean clockwise;
+  private static Spinner spinner;
 
   public SpinWheel(Spinner subsystem, boolean isClockwise) {
-    spinner = subsystem;
     clockwise = isClockwise;
+    spinner = subsystem;
     addRequirements(subsystem);
   }
 
@@ -24,10 +25,10 @@ public class SpinWheel extends CommandBase {
   @Override
   public void initialize() {
     if (clockwise) {
-      spinner.spinClockwise();
+      Robot.m_spinner.spinClockwise();
     }
     else {
-      spinner.spinCClockwise();
+      Robot.m_spinner.spinCClockwise();
     }
   }
 

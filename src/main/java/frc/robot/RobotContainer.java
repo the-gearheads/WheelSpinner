@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Spinner;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Spin360;
+import frc.robot.commands.SpinColor;
 import frc.robot.commands.SpinWheel;
 import frc.robot.commands.StopWheel;
 
@@ -21,8 +23,8 @@ import frc.robot.commands.StopWheel;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Spinner spinner = new Spinner();
   private final XboxController controller = new XboxController(0);
+  private final static Spinner spinner = new Spinner();
 
   public RobotContainer() {
     configureButtonBindings();
@@ -40,6 +42,12 @@ public class RobotContainer {
 
     new JoystickButton(controller, XboxController.Button.kB.value)
     .whenReleased(new StopWheel(spinner));
+    
+    new JoystickButton(controller, XboxController.Button.kX.value)
+    .whenPressed(new Spin360(spinner, 1));
+
+    new JoystickButton(controller, XboxController.Button.kY.value)
+    .whenPressed(new SpinColor(spinner, "Blue"));
 
   }
 }
